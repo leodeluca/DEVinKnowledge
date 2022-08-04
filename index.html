@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEVinKnowledge</title>
+    <link rel="icon" href="images/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" type="module"></script>
+</head>
+
+<body>
+    <main>
+        <div class="formulario">
+            <div class="titulo">
+                <h1>DEVinKnowledge</h3>
+            </div>
+            <form id="form-recipe">
+                <div class="form-item">
+                    <label for="titulo">Titulo</label><br>
+                    <input type="text" id="titulo" name="titulo" placeholder="Informe o titulo" minlength="8"
+                        maxlength="64" required>
+                </div>
+                <div class="form-item">
+                    <label for="linguagem">Linguagem/Skill</label><br>
+                    <input type="text" id="linguagem" name="linguagem" placeholder="Informe a linguagem usada"
+                        minlength="4" maxlength="16" required>
+                </div>
+                <div class="form-item">
+                    <label for="categoria">Categoria</label><br>
+                    <select name="categoria" id="categoria" required>
+                        <option value="" selected>Escolha um opção</option>
+                        <option value="front-end">FrontEnd</option>
+                        <option value="back-end">BackEnd</option>
+                        <option value="full-stack">FullStack</option>
+                        <option value="soft">Comportamental/Soft</option>
+                    </select>
+                </div>
+                <div class="form-item">
+                    <label for="descricao">Descrição</label>
+                    <textarea name="descricao" id="descricao" placeholder="Descreva o assunto"
+                        maxlength="512"></textarea>
+                </div>
+                <div class="form-item">
+                    <label for="video">Video do YouTube</label>
+                    <input type="text" id="video" name="video" placeholder="Insira o link para o video">
+                </div>
+                <div class="form-item">
+                    <div class="btn">
+                        <button id="btn-limpar" type="reset" value="Limpar">Limpar</button>
+                        <button id="btn-salvar" type="submit" value="Salvar">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="cards">
+            <div class="card-estatistica">card-estatistica</div>
+            <div class="card-pesquisa">card-pesquisa</div>
+            <div class="card-itens"></div>
+        </div>
+    </main>
+</body>
+
+</html>
