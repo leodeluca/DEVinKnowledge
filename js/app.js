@@ -9,6 +9,11 @@ const cardItens = document.querySelector(".card-itens")
 const divBotao = document.querySelector(".btn")
 const barraPesquisa = document.querySelector("#barra-pesquisa")
 const btnPesquisa = document.querySelector("#btn-pesquisa")
+const pTotal = document.querySelector("#total")
+const pFront = document.querySelector("#front")
+const pBack = document.querySelector("#back")
+const pFull = document.querySelector("#full")
+const pSoft = document.querySelector("#soft")
 
 const form = document.querySelector("#form-recipe")
 
@@ -22,12 +27,13 @@ btnPesquisa.addEventListener("click", pesquisaCard)
 barraPesquisa.addEventListener("input", atualizaLista)
 
 let listaArr = []
+calculaDados()
 
 function montaCard(item, indice) {
 
   const div = document.createElement("div")
   cardItens.appendChild(div)
-  
+
   const hTitulo = document.createElement("h3")
   hTitulo.innerText = item[0]
   const pLinguagem = document.createElement("p")
@@ -62,9 +68,11 @@ function montaCard(item, indice) {
 }
 
 function pesquisaCard() {
+  console.log("entrou")
   const novaListaArr = []
   listaArr.map(item => {
-    if (barraPesquisa.value.toLowerCase() === item[0].toLowerCase()) {
+    if (barraPesquisa.value.indexOf(item[0].toLowerCase()) !== -1) {
+      console.log("entrou")
       novaListaArr.push(item)
     }
   })
@@ -85,6 +93,8 @@ function adicionaItensLista() {
   listaArr.push(itens)
 
   atualizaLista()
+
+  calculaDados()
 }
 
 function atualizaLista() {
@@ -110,6 +120,7 @@ function limpaForm() {
 function removeItemLista(indice) {
   listaArr = listaArr.filter((_, i) => i !== indice)
   atualizaLista()
+  calculaDados()
 }
 
 function editaItemLista(indice) {
@@ -148,12 +159,52 @@ function confirmaEdicao(indice) {
 
   atualizaLista()
 
+  calculaDados()
 }
 
 function acessaVideo(indice) {
   const newArr = listaArr.find((_, idx) => idx === indice)
   const win = window.open(newArr[4], '_blank')
   win.focus()
+}
+
+function calculaDados() {
+
+  let total = 0
+  let front = 0
+  let back = 0
+  let full = 0 
+  let soft = 0
+
+  for (let i = 0; i < listaArr.length; i++) {
+    const element = listaArr[i]
+      if (element[2] === "front"){
+        total++
+        front++
+      }
+      if (element[2] === "back"){
+        total++
+        back++
+      }
+      if (element[2] === "full"){
+        total++
+        full++
+      }
+      if (element[2] === "soft"){
+        total++
+        soft++
+      }
+      if (!element[2]){
+        return false
+      }
+    }
+    
+    pTotal.innerText = total
+    pFront.innerText = front
+    pBack.innerText = back
+    pFull.innerText = full
+    pSoft.innerText = soft
+
 }
 
 

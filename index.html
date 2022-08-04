@@ -16,37 +16,37 @@
     <main>
         <div class="formulario">
             <div class="titulo">
-                <img src="images/favicon.png" alt="DEVinKnowledge">
+                <img src="images/book-white.png" alt="DEVinKnowledge">
                 <h1>DEVinKnowledge</h3>
             </div>
             <form id="form-recipe" action="">
                 <div class="form-item">
-                    <label for="titulo">Titulo</label><br>
-                    <input type="text" id="titulo" name="titulo" placeholder="Informe o titulo" minlength="8"
+                    <label for="titulo">Titulo:</label><br>
+                    <input type="text" id="titulo" name="titulo" placeholder="Informe o título" minlength="8"
                         maxlength="64" required>
                 </div>
                 <div class="form-item">
-                    <label for="linguagem">Linguagem/Skill</label><br>
+                    <label for="linguagem">Linguagem/Skill:</label><br>
                     <input type="text" id="linguagem" name="linguagem" placeholder="Informe a linguagem usada"
                         minlength="4" maxlength="16" required>
                 </div>
                 <div class="form-item">
-                    <label for="categoria">Categoria</label><br>
+                    <label for="categoria">Categoria:</label><br>
                     <select name="categoria" id="categoria" required>
-                        <option value="" selected>Escolha um opção</option>
-                        <option value="front-end">FrontEnd</option>
-                        <option value="back-end">BackEnd</option>
-                        <option value="full-stack">FullStack</option>
+                        <option value="" selected>Escolha uma opção</option>
+                        <option value="front">FrontEnd</option>
+                        <option value="back">BackEnd</option>
+                        <option value="full">FullStack</option>
                         <option value="soft">Comportamental/Soft</option>
                     </select>
                 </div>
                 <div class="form-item">
-                    <label for="descricao">Descrição</label>
+                    <label for="descricao">Descrição:</label>
                     <textarea name="descricao" id="descricao" placeholder="Descreva o assunto"
                         maxlength="512"></textarea>
                 </div>
                 <div class="form-item">
-                    <label for="video">Video do YouTube</label>
+                    <label for="video">Video:</label>
                     <input type="text" id="video" name="video" placeholder="Insira o link para o video">
                 </div>
                 <div class="form-item">
@@ -60,28 +60,28 @@
         <div class="cards">
             <div class="estatistica">
                 <div class="card-estatistica">
-                    <h5>Total</h5>
-                    <p></p>
+                    <h4>Total</h4>
+                    <p id="total"></p>
                 </div>
                 <div class="card-estatistica">
-                    <h5>FrontEnd</h5>
-                    <p></p>
+                    <h4>FrontEnd</h4>
+                    <p id="front"></p>
                 </div>
                 <div class="card-estatistica">
-                    <h5>BackEnd</h5>
-                    <p></p>
+                    <h4>BackEnd</h4>
+                    <p id="back"></p>
                 </div>
                 <div class="card-estatistica">
-                    <h5>FullStack</h5>
-                    <p></p>
+                    <h4>FullStack</h4>
+                    <p id="full"></p>
                 </div>
                 <div class="card-estatistica">
-                    <h5>SoftSkill</h5>
-                    <p></p>
+                    <h4>SoftSkill</h4>
+                    <p id="soft"></p>
                 </div>
             </div>
             <div class="card-pesquisa">
-                <input type="text" id="barra-pesquisa" placeholder="Pesquisa titulo">
+                <input type="text" id="barra-pesquisa" placeholder="Pesquisar título...">
                 <button id="btn-pesquisa"><i class="fa fa-search"></i></button>
             </div>
             <div class="card-itens"></div>

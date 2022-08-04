@@ -4,13 +4,24 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    font-family: sans-serif;
+    font-family:sans-serif;
 }
 
 main {
     flex-grow: 12;
     display: flex;
     flex-direction: row;
+}
+
+.titulo{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+.titulo img{
+    width: 5rem
 }
 
 .formulario {
@@ -24,8 +35,21 @@ form .form-item {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    padding: 5px;
 }
+
+.form-item label {
+    padding-bottom: 5px;
+    font-size: 18px;
+}
+
+input, select, textarea {
+    width: 350px;
+    font-size: 16px;
+    padding: 5px 5px;
+    border-radius: 5px;
+}
+
 
 textarea {
     resize: none;
@@ -48,7 +72,13 @@ textarea {
     display: flex;
     justify-content: space-around;
     padding: 20px;
+    font-size: 20px;
 }
+
+.estatistica p{
+    font-size: 22px;
+    margin-top: 0;
+}   
 
 .card-estatistica {
     background-color: black;
@@ -57,19 +87,37 @@ textarea {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 5px;
+    border-radius: 20px;
     width: 150px;
     margin: 5px;
+    box-shadow: 1px 1px 3px black;
 }
 
 .card-pesquisa{
     text-align: center;
+    padding: 15px;
 }
 
-#btn-pesquisa, #barra-pesquisa{
+#btn-pesquisa{
     margin: 0;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 5px 5px;
+    width: 50px;
+    cursor: pointer;
+    /* box-shadow: 1px 1px 2px black; */
+}
+
+#barra-pesquisa{
+    margin: 0;
+    border-radius: 5px;
+    width: 300px;
+    font-size: 20px;
+    padding: 5px 5px;
+    
 }
 
 .card-itens{
     text-align: center;
 }
+
