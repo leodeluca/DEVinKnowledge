@@ -8,6 +8,7 @@
     <title>DEVinKnowledge</title>
     <link rel="icon" href="images/favicon.png">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="js/app.js" type="module"></script>
 </head>
 
@@ -15,9 +16,10 @@
     <main>
         <div class="formulario">
             <div class="titulo">
+                <img src="images/favicon.png" alt="DEVinKnowledge">
                 <h1>DEVinKnowledge</h3>
             </div>
-            <form id="form-recipe">
+            <form id="form-recipe" action="">
                 <div class="form-item">
                     <label for="titulo">Titulo</label><br>
                     <input type="text" id="titulo" name="titulo" placeholder="Informe o titulo" minlength="8"
@@ -56,8 +58,32 @@
             </form>
         </div>
         <div class="cards">
-            <div class="card-estatistica">card-estatistica</div>
-            <div class="card-pesquisa">card-pesquisa</div>
+            <div class="estatistica">
+                <div class="card-estatistica">
+                    <h5>Total</h5>
+                    <p></p>
+                </div>
+                <div class="card-estatistica">
+                    <h5>FrontEnd</h5>
+                    <p></p>
+                </div>
+                <div class="card-estatistica">
+                    <h5>BackEnd</h5>
+                    <p></p>
+                </div>
+                <div class="card-estatistica">
+                    <h5>FullStack</h5>
+                    <p></p>
+                </div>
+                <div class="card-estatistica">
+                    <h5>SoftSkill</h5>
+                    <p></p>
+                </div>
+            </div>
+            <div class="card-pesquisa">
+                <input type="text" id="barra-pesquisa" placeholder="Pesquisa titulo">
+                <button id="btn-pesquisa"><i class="fa fa-search"></i></button>
+            </div>
             <div class="card-itens"></div>
         </div>
     </main>

@@ -7,6 +7,8 @@ const btnSalvar = document.querySelector("#btn-salvar")
 const btnLimpar = document.querySelector("#btn-limpar")
 const cardItens = document.querySelector(".card-itens")
 const divBotao = document.querySelector(".btn")
+const barraPesquisa = document.querySelector("#barra-pesquisa")
+const btnPesquisa = document.querySelector("#btn-pesquisa")
 
 const form = document.querySelector("#form-recipe")
 
@@ -16,6 +18,8 @@ form.addEventListener("submit", (event) => {
 
 btnSalvar.addEventListener("click", adicionaItensLista)
 btnLimpar.addEventListener("click", limpaForm)
+btnPesquisa.addEventListener("click", pesquisaCard)
+barraPesquisa.addEventListener("input", atualizaLista)
 
 let listaArr = []
 
@@ -23,6 +27,7 @@ function montaCard(item, indice) {
 
   const div = document.createElement("div")
   cardItens.appendChild(div)
+  
   const hTitulo = document.createElement("h3")
   hTitulo.innerText = item[0]
   const pLinguagem = document.createElement("p")
@@ -51,9 +56,22 @@ function montaCard(item, indice) {
   div.appendChild(btnExcluir)
   btnEditar.addEventListener("click", () => editaItemLista(indice))
   div.appendChild(btnEditar)
-  btnVideo.addEventListener("click", () => abreVideo(indice))
+  btnVideo.addEventListener("click", () => acessaVideo(indice))
   div.appendChild(btnVideo)
 
+}
+
+function pesquisaCard() {
+  const novaListaArr = []
+  listaArr.map(item => {
+    if (barraPesquisa.value.toLowerCase() === item[0].toLowerCase()) {
+      novaListaArr.push(item)
+    }
+  })
+  cardItens.innerHTML = ''
+  novaListaArr.forEach((item, indice) => {
+    montaCard(item, indice)
+  })
 }
 
 function adicionaItensLista() {
@@ -82,6 +100,11 @@ function limpaForm() {
   categoria.value = ""
   descricao.value = ""
   video.value = ""
+
+  ///ToDo: validar existencia do botao antes de remover
+  const btnConfirmaEdicao = document.getElementById("btn-edicao")
+  divBotao.removeChild(btnConfirmaEdicao)
+
 }
 
 function removeItemLista(indice) {
@@ -100,31 +123,37 @@ function editaItemLista(indice) {
     }
   })
 
-  console.log(listaArr)
-  console.log(indice)
-
   const btnConfirmaEdicao = document.createElement("button")
+  btnConfirmaEdicao.setAttribute("id", "btn-edicao")
   btnConfirmaEdicao.innerText = "Editar"
   divBotao.appendChild(btnConfirmaEdicao)
-
   btnConfirmaEdicao.addEventListener("click", () => confirmaEdicao(indice))
 }
 
 function confirmaEdicao(indice) {
 
-  listaArr.filter((i, idx) => {
-    if (idx === indice) {
-      i = []
-      i.push(titulo.value)
-      i.push(linguagem.value)
-      i.push(categoria.value)
-      i.push(descricao.value)
-      i.push(video.value)
-      console.log(i)
-      console.log(idx)
+  const newArr = listaArr.find((_, idx) => idx === indice)
+
+  newArr[0] = titulo.value
+  newArr[1] = linguagem.value
+  newArr[2] = categoria.value
+  newArr[3] = descricao.value
+  newArr[4] = video.value
+
+  listaArr.forEach((i, idx) => {
+    if (indice === idx) {
+      i = newArr
     }
   })
 
+  atualizaLista()
+
+}
+
+function acessaVideo(indice) {
+  const newArr = listaArr.find((_, idx) => idx === indice)
+  const win = window.open(newArr[4], '_blank')
+  win.focus()
 }
 
 

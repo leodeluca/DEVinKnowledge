@@ -20,7 +20,7 @@ main {
     padding: 40px;
 }
 
-form .form-item{
+form .form-item {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -34,13 +34,42 @@ textarea {
 .cards {
     display: flex;
     flex-direction: column;
-    justify-content:initial;
-    align-items: center;
+    justify-content: initial;
     width: 70%;
 }
 
-#btn-salvar:hover ,
+#btn-salvar:hover,
 #btn-limpar:hover {
     color: aliceblue;
     cursor: pointer;
+}
+
+.estatistica {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.card-estatistica {
+    background-color: black;
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    width: 150px;
+    margin: 5px;
+}
+
+.card-pesquisa{
+    text-align: center;
+}
+
+#btn-pesquisa, #barra-pesquisa{
+    margin: 0;
+}
+
+.card-itens{
+    text-align: center;
 }
