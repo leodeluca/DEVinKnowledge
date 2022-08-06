@@ -1,3 +1,14 @@
+import {
+  validaTitulo,
+  validaSkill,
+  validaCategoria,
+  validaDescricao,
+  validaVideo,
+  msgSalvar,
+  msgEditar
+} from "./utils.js"
+
+
 const titulo = document.querySelector("#titulo")
 const linguagem = document.querySelector("#linguagem")
 const categoria = document.querySelector("#categoria")
@@ -15,7 +26,7 @@ const pBack = document.querySelector("#back")
 const pFull = document.querySelector("#full")
 const pSoft = document.querySelector("#soft")
 
-const form = document.querySelector("#form-recipe")
+const form = document.querySelector("#form")
 
 form.addEventListener("submit", (event) => {
   event.preventDefault()
@@ -37,7 +48,7 @@ function montaCard(item, indice) {
   cardItens.appendChild(div)
 
   const hTitulo = document.createElement("h3")
-  hTitulo.innerHTML = `<strong>Título:</strong> ${item[0]}`
+  hTitulo.innerHTML = `${item[0]}`
   const pLinguagem = document.createElement("p")
   pLinguagem.innerHTML = `<strong>Linguagem/Skill:</strong> ${item[1]}`
   const pCategoria = document.createElement("p")
@@ -71,6 +82,10 @@ function montaCard(item, indice) {
   btnVideo.addEventListener("click", () => acessaVideo(indice))
   div.appendChild(btnVideo)
 
+  if (!item[4]) {
+    btnVideo.disabled = true
+  }
+
 }
 
 function pesquisaCard() {
@@ -80,7 +95,6 @@ function pesquisaCard() {
   listaArr.map(item => {
     const str = item[0].toLowerCase()
     if (str.indexOf(substr) !== -1) {
-      console.log("true")
       novaListaArr.push(item)
     }
   })
@@ -93,17 +107,28 @@ function pesquisaCard() {
 
 function adicionaItensLista() {
   let itens = []
-  itens.push(titulo.value)
-  itens.push(linguagem.value)
-  itens.push(categoria.value)
-  itens.push(descricao.value)
-  itens.push(video.value)
 
-  listaArr.push(itens)
+  if (!validaTitulo(titulo.value)
+    || !validaSkill(linguagem.value)
+    || !validaCategoria(categoria.value)
+    || !validaDescricao(descricao.value)
+    || !validaVideo(video.value)) {
+    return
+  } else {
+    itens.push(titulo.value)
+    itens.push(linguagem.value)
+    itens.push(categoria.value)
+    itens.push(descricao.value)
+    itens.push(video.value)
+    listaArr.push(itens)
 
-  atualizaLista()
-  salvaLista()
-  calculaDados()
+    atualizaLista()
+    salvaLista()
+    msgSalvar()
+    calculaDados()
+    limpaForm()
+  }
+
 }
 
 function atualizaLista() {
@@ -127,17 +152,21 @@ function limpaForm() {
 }
 
 function removeItemLista(indice) {
-  listaArr = listaArr.filter((_, i) => i !== indice)
-  atualizaLista()
-  salvaLista()
-  calculaDados()
+  if (window.confirm("Deseja excluir a da dica?")) {
+    listaArr = listaArr.filter((_, i) => i !== indice)
+    atualizaLista()
+    salvaLista()
+    calculaDados()
+  } else {
+    return
+  }
 }
 
 function editaItemLista(indice) {
 
   const btnEditar = document.querySelector("#btn-editar")
   btnEditar.disabled = true
-  btnSalvar.style.display = "none"
+  btnSalvar.disabled = true
 
   listaArr.filter((i, idx) => {
     if (idx === indice) {
@@ -154,34 +183,44 @@ function editaItemLista(indice) {
   btnConfirmaEdicao.innerText = "Editar"
   divBotao.appendChild(btnConfirmaEdicao)
   btnConfirmaEdicao.addEventListener("click", () => confirmaEdicao(indice))
+
+  msgEditar()
 }
 
 function confirmaEdicao(indice) {
 
   const newArr = listaArr.find((_, idx) => idx === indice)
 
-  newArr[0] = titulo.value
-  newArr[1] = linguagem.value
-  newArr[2] = categoria.value
-  newArr[3] = descricao.value
-  newArr[4] = video.value
+  if (!validaTitulo(titulo.value)
+    || !validaSkill(linguagem.value)
+    || !validaCategoria(categoria.value)
+    || !validaDescricao(descricao.value)
+    || !validaVideo(video.value)) {
+    return
+  } else {
+    newArr[0] = titulo.value
+    newArr[1] = linguagem.value
+    newArr[2] = categoria.value
+    newArr[3] = descricao.value
+    newArr[4] = video.value
+  }
 
-  listaArr.forEach((i, idx) => {
-    if (indice === idx) {
-      i = newArr
-    }
-  })
-
-  atualizaLista()
-  salvaLista()
-  calculaDados()
+  if (window.confirm("Deseja editar a dica?")) {
+    listaArr.forEach((i, idx) => {
+      if (indice === idx) {
+        i = newArr
+      }
+    })
+    atualizaLista()
+    salvaLista()
+    calculaDados()
+  }
 
   const btnEditar = document.querySelector("#btn-editar")
   btnEditar.disabled = false
-  btnSalvar.style.display = "initial"
+  btnSalvar.disabled = false
   const btnConfirmaEdicao = document.querySelector("#btn-edicao")
   btnConfirmaEdicao.style.display = "none"
-
   limpaForm()
 }
 
@@ -201,19 +240,19 @@ function calculaDados() {
 
   for (let i = 0; i < listaArr.length; i++) {
     const element = listaArr[i]
-    if (element[2] === "front") {
+    if (element[2] === "FrontEnd") {
       total++
       front++
     }
-    if (element[2] === "back") {
+    if (element[2] === "BackEnd") {
       total++
       back++
     }
-    if (element[2] === "full") {
+    if (element[2] === "FullStack") {
       total++
       full++
     }
-    if (element[2] === "soft") {
+    if (element[2] === "SoftSkill") {
       total++
       soft++
     }
