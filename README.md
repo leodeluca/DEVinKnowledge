@@ -1,6 +1,4 @@
-# README #
-
-DEVinKnowledge - Learn, Code and Save
+# DEVinKnowledge - Learn, Code and Save #
 
 ### Sobre o projeto ###
 
