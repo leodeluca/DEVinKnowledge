@@ -17,19 +17,22 @@
         <div class="formulario">
             <div class="titulo">
                 <img src="images/book-white.png" alt="DEVinKnowledge">
-                <h1>DEVinKnowledge</h3>
+                <div class="titulo-texto">
+                    <h1>DEVinKnowledge</h3>
+                        <p>learn, code and share </p>
+                </div>
             </div>
             <form id="form">
                 <div class="form-item">
-                    <label for="titulo">Titulo:</label><br>
+                    <label for="titulo">Titulo:*</label><br>
                     <input type="text" id="titulo" name="titulo" placeholder="Informe o título">
                 </div>
                 <div class="form-item">
-                    <label for="linguagem">Linguagem/Skill:</label><br>
-                    <input type="text" id="linguagem" name="linguagem" placeholder="Informe a linguagem usada">
+                    <label for="linguagem">Linguagem/Skill:*</label><br>
+                    <input type="text" id="linguagem" name="linguagem" placeholder="Informe a linguagem">
                 </div>
                 <div class="form-item">
-                    <label for="categoria">Categoria:</label><br>
+                    <label for="categoria">Categoria:*</label><br>
                     <select name="categoria" id="categoria">
                         <option value="" selected>Escolha uma opção</option>
                         <option value="FrontEnd">FrontEnd</option>
@@ -39,12 +42,12 @@
                     </select>
                 </div>
                 <div class="form-item">
-                    <label for="descricao">Descrição:</label>
+                    <label for="descricao">Descrição:*</label>
                     <textarea name="descricao" id="descricao" placeholder="Descreva a sua dica"></textarea>
                 </div>
                 <div class="form-item">
                     <label for="video">Video:</label>
-                    <input type="text" id="video" name="video" placeholder="Insira o link para o video">
+                    <input type="text" id="video" name="video" placeholder="Insira link do video (opcional)">
                 </div>
                 <div class="form-item">
                     <div class="btn">

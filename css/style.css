@@ -4,7 +4,11 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    font-family: sans-serif;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+::placeholder {
+    font-family: 'Courier New', Courier, monospace;
 }
 
 main {
@@ -22,6 +26,16 @@ main {
 
 .titulo img {
     width: 5rem
+}
+
+.titulo-texto h1 {
+    text-align: left;
+    margin-bottom: 1px;
+}
+
+.titulo-texto p {
+    text-align: right;
+    margin-top: 1px;
 }
 
 .formulario {
@@ -52,6 +66,10 @@ textarea {
     border-radius: 5px;
 }
 
+option {
+    font-family: 'Courier New', Courier, monospace;
+}
+
 textarea {
     resize: none;
 }
@@ -69,10 +87,13 @@ textarea {
     margin-top: 15px;
     cursor: pointer;
     width: 100px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
 }
 
 .btn button:disabled {
     background-color: black;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .cards {

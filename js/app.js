@@ -36,7 +36,7 @@ btnPesquisa.addEventListener("click", pesquisaCard)
 barraPesquisa.addEventListener("input", atualizaLista)
 
 let listaArr = []
-let novaListaArr = []
+let listaArrPesquisa = []
 recuperaLista()
 calculaDados()
 limpaForm()
@@ -66,7 +66,6 @@ function montaCard(item, indice) {
   btnExcluir.innerHTML = `<i class="fa fa-trash"></i>`
   const btnEditar = document.createElement("button")
   btnEditar.setAttribute("title", "Editar")
-  btnEditar.setAttribute("class", "edCard")
   btnEditar.innerHTML = `<i class="fa fa-file-o"></i>`
   const btnVideo = document.createElement("button")
   btnVideo.setAttribute("title", "Link Vídeo")
@@ -91,19 +90,14 @@ function pesquisaCard() {
   listaArr.map(item => {
     const str = item[0].toLowerCase()
     if (str.indexOf(substr) !== -1) {
-      novaListaArr.push(item)
+      listaArrPesquisa.push(item)
     }
   })
 
   cardItens.innerHTML = ''
-  novaListaArr.forEach((item, indice) => {
+  listaArrPesquisa.forEach((item, indice) => {
     montaCard(item, indice)
   })
-
-  const childNodes = cardItens.getElementsByClassName("edCard")
-  for (let node of childNodes) {
-    node.disabled = true
-  }
 
 }
 
@@ -122,6 +116,14 @@ function adicionaItensLista() {
     itens.push(categoria.value)
     itens.push(descricao.value)
     itens.push(video.value)
+
+    let ultimoElementoArr = []
+    ultimoElementoArr = listaArr[listaArr.length - 1]
+    let contadorId = 0
+    contadorId = !ultimoElementoArr ? contadorId = 0 : ultimoElementoArr[ultimoElementoArr.length - 1]
+    contadorId++
+    itens.push(contadorId)
+
     listaArr.push(itens)
 
     atualizaLista()
@@ -134,12 +136,7 @@ function adicionaItensLista() {
 }
 
 function atualizaLista() {
-  novaListaArr = []
-
-  const childNodes = cardItens.getElementsByClassName("edCard")
-  for (let node of childNodes) {
-    node.disabled = false
-  }
+  listaArrPesquisa = []
 
   cardItens.innerHTML = ''
   listaArr.forEach((item, indice) => {
@@ -157,7 +154,7 @@ function limpaForm() {
 
 function removeItemLista(indice) {
 
-  let arrControle = novaListaArr.length > 0 ? novaListaArr : listaArr
+  let arrControle = listaArrPesquisa.length > 0 ? listaArrPesquisa : listaArr
 
   if (window.confirm("Deseja excluir a da dica?")) {
 
@@ -182,7 +179,9 @@ function editaItemLista(indice) {
     node.disabled = true
   }
 
-  listaArr.filter((i, idx) => {
+  const arrControle = listaArrPesquisa.length > 0 ? listaArrPesquisa : listaArr
+
+  arrControle.filter((i, idx) => {
     if (idx === indice) {
       titulo.value = i[0]
       linguagem.value = i[1]
@@ -203,7 +202,11 @@ function editaItemLista(indice) {
 
 function confirmaEdicao(indice) {
 
-  const newArr = listaArr.find((_, idx) => idx === indice)
+  const arrControle = listaArrPesquisa.length > 0 ? listaArrPesquisa : listaArr
+
+  const newArr = arrControle.find((_, idx) => idx === indice)
+
+  let ultimoElementoArr = newArr[newArr.length - 1]
 
   if (!validaTitulo(titulo.value)
     || !validaSkill(linguagem.value)
@@ -217,14 +220,16 @@ function confirmaEdicao(indice) {
     newArr[2] = categoria.value
     newArr[3] = descricao.value
     newArr[4] = video.value
+    newArr[5] = ultimoElementoArr
   }
 
   if (window.confirm("Deseja editar a dica?")) {
     listaArr.forEach((i, idx) => {
-      if (indice === idx) {
+      if (i[5] === newArr[5]) {
         i = newArr
       }
     })
+
     atualizaLista()
     salvaLista()
     calculaDados()
@@ -246,7 +251,7 @@ function confirmaEdicao(indice) {
 
 function acessaVideo(indice) {
 
-  const arrControle = novaListaArr.length > 0 ? novaListaArr : listaArr
+  const arrControle = listaArrPesquisa.length > 0 ? listaArrPesquisa : listaArr
 
   const newArr = arrControle.find((_, idx) => idx === indice)
   const win = window.open(newArr[4], '_blank')
