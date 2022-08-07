@@ -1,29 +1,19 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+DEVinKnowledge - Learn, Code and Save
 
-### What is this repository for? ###
+### Sobre o projeto ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Aplicação Web para registro e consulta de dicas sobre desenvolvimento de software
+* Referente ao primeiro projeto do primeiro módulo do curso DevInHouse - SENAI - Turma EDP
+* Versão 1.0.0
 
-### How do I get set up? ###
+### Como foi feito? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* HTML5, CSS3 e ECMAScript 6
+* Persistência com Local Storage
 
-### Contribution guidelines ###
+### Desenvolvedor ###
 
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+* https://www.linkedin.com/in/leonardo-cirimbelli-de-luca-3b779612b/
+* leocluca@gmail.com

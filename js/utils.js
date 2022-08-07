@@ -1,3 +1,11 @@
+export function msgSalvar() {
+    alert("Dica Cadastrada com Sucesso na base de conhecimento!")
+}
+
+export function msgEditar() {
+    alert("As informações da dica selecionada para edição foram enviadas para a barra lateral. Realize as devidas edições e clique em Editar para finalizar")
+}
+
 export function validaTitulo(item) {
     if (!item) {
         alert("Campo Título Obrigatório")
@@ -51,12 +59,4 @@ export function validaVideo(item) {
         return false
     }
     return true
-}
-
-export function msgSalvar() {
-    alert("Dica Cadastrada com Sucesso na base de conhecimento!")
-}
-
-export function msgEditar() {
-    alert(`As informações da dica selecionada para edição foram enviadas para a barra lateral. Realize as devidas edições e clique em Editar para finalizar`)
 }

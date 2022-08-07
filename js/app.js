@@ -8,7 +8,6 @@ import {
   msgEditar
 } from "./utils.js"
 
-
 const titulo = document.querySelector("#titulo")
 const linguagem = document.querySelector("#linguagem")
 const categoria = document.querySelector("#categoria")
@@ -27,7 +26,6 @@ const pFull = document.querySelector("#full")
 const pSoft = document.querySelector("#soft")
 
 const form = document.querySelector("#form")
-
 form.addEventListener("submit", (event) => {
   event.preventDefault()
 })
@@ -38,9 +36,11 @@ btnPesquisa.addEventListener("click", pesquisaCard)
 barraPesquisa.addEventListener("input", atualizaLista)
 
 let listaArr = []
+let novaListaArr = []
 recuperaLista()
 calculaDados()
 limpaForm()
+barraPesquisa.value = ''
 
 function montaCard(item, indice) {
 
@@ -55,20 +55,18 @@ function montaCard(item, indice) {
   pCategoria.innerHTML = `<strong>Categoria:</strong> ${item[2]}`
   const pDescricao = document.createElement("p")
   pDescricao.innerText = item[3]
-  // const pVideo = document.createElement("p")
-  // pVideo.innerText = item[4]
 
   div.appendChild(hTitulo)
   div.appendChild(pLinguagem)
   div.appendChild(pCategoria)
   div.appendChild(pDescricao)
-  // div.appendChild(pVideo)
 
   const btnExcluir = document.createElement("button")
   btnExcluir.setAttribute("title", "Excluir")
   btnExcluir.innerHTML = `<i class="fa fa-trash"></i>`
   const btnEditar = document.createElement("button")
   btnEditar.setAttribute("title", "Editar")
+  btnEditar.setAttribute("class", "edCard")
   btnEditar.innerHTML = `<i class="fa fa-file-o"></i>`
   const btnVideo = document.createElement("button")
   btnVideo.setAttribute("title", "Link Vídeo")
@@ -77,7 +75,6 @@ function montaCard(item, indice) {
   btnExcluir.addEventListener("click", () => removeItemLista(indice))
   div.appendChild(btnExcluir)
   btnEditar.addEventListener("click", () => editaItemLista(indice))
-  btnEditar.setAttribute("id", "btn-editar")
   div.appendChild(btnEditar)
   btnVideo.addEventListener("click", () => acessaVideo(indice))
   div.appendChild(btnVideo)
@@ -89,9 +86,8 @@ function montaCard(item, indice) {
 }
 
 function pesquisaCard() {
-  const novaListaArr = []
-  const substr = barraPesquisa.value.toLowerCase()
 
+  const substr = barraPesquisa.value.toLowerCase()
   listaArr.map(item => {
     const str = item[0].toLowerCase()
     if (str.indexOf(substr) !== -1) {
@@ -103,6 +99,12 @@ function pesquisaCard() {
   novaListaArr.forEach((item, indice) => {
     montaCard(item, indice)
   })
+
+  const childNodes = cardItens.getElementsByClassName("edCard")
+  for (let node of childNodes) {
+    node.disabled = true
+  }
+
 }
 
 function adicionaItensLista() {
@@ -132,6 +134,13 @@ function adicionaItensLista() {
 }
 
 function atualizaLista() {
+  novaListaArr = []
+
+  const childNodes = cardItens.getElementsByClassName("edCard")
+  for (let node of childNodes) {
+    node.disabled = false
+  }
+
   cardItens.innerHTML = ''
   listaArr.forEach((item, indice) => {
     montaCard(item, indice)
@@ -144,16 +153,17 @@ function limpaForm() {
   categoria.value = ""
   descricao.value = ""
   video.value = ""
-
-  ///ToDo: validar existencia do botao antes de remover
-  const btnConfirmaEdicao = document.getElementById("btn-edicao")
-  divBotao.removeChild(btnConfirmaEdicao)
-
 }
 
 function removeItemLista(indice) {
+
+  let arrControle = novaListaArr.length > 0 ? novaListaArr : listaArr
+
   if (window.confirm("Deseja excluir a da dica?")) {
-    listaArr = listaArr.filter((_, i) => i !== indice)
+
+    let elExcluido = arrControle.find((_, idx) => idx === indice)
+    listaArr = listaArr.filter((item, _) => item !== elExcluido)
+
     atualizaLista()
     salvaLista()
     calculaDados()
@@ -164,9 +174,13 @@ function removeItemLista(indice) {
 
 function editaItemLista(indice) {
 
-  const btnEditar = document.querySelector("#btn-editar")
-  btnEditar.disabled = true
   btnSalvar.disabled = true
+  btnLimpar.disabled = true
+
+  const childNodes = cardItens.getElementsByTagName("button")
+  for (let node of childNodes) {
+    node.disabled = true
+  }
 
   listaArr.filter((i, idx) => {
     if (idx === indice) {
@@ -216,18 +230,28 @@ function confirmaEdicao(indice) {
     calculaDados()
   }
 
-  const btnEditar = document.querySelector("#btn-editar")
-  btnEditar.disabled = false
+  const childNodes = cardItens.getElementsByTagName("button")
+  for (let node of childNodes) {
+    node.disabled = false
+  }
+
   btnSalvar.disabled = false
+  btnLimpar.disabled = false
+
   const btnConfirmaEdicao = document.querySelector("#btn-edicao")
-  btnConfirmaEdicao.style.display = "none"
+  btnConfirmaEdicao.remove()
+
   limpaForm()
 }
 
 function acessaVideo(indice) {
-  const newArr = listaArr.find((_, idx) => idx === indice)
+
+  const arrControle = novaListaArr.length > 0 ? novaListaArr : listaArr
+
+  const newArr = arrControle.find((_, idx) => idx === indice)
   const win = window.open(newArr[4], '_blank')
   win.focus()
+
 }
 
 function calculaDados() {
@@ -266,12 +290,10 @@ function calculaDados() {
   pBack.innerText = back
   pFull.innerText = full
   pSoft.innerText = soft
-
 }
 
 function salvaLista() {
   const listaJSON = JSON.stringify(listaArr)
-  console.log(listaJSON)
   localStorage.setItem("lista", listaJSON)
 }
 
@@ -284,5 +306,4 @@ function recuperaLista() {
     listaArr = JSON.parse(listaJSON)
     atualizaLista()
   }
-
 }
