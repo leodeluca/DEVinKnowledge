@@ -25,7 +25,7 @@ main {
 }
 
 .titulo img {
-    width: 5rem
+    width: 90px;
 }
 
 .titulo-texto h1 {
@@ -46,6 +46,7 @@ main {
 }
 
 form .form-item {
+    overflow: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -66,7 +67,12 @@ textarea {
     border-radius: 5px;
 }
 
-option {
+#categoria {
+    width: 365px;
+}
+
+option,
+select {
     font-family: 'Courier New', Courier, monospace;
 }
 
@@ -88,11 +94,11 @@ textarea {
     cursor: pointer;
     width: 100px;
     font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
 }
 
 .btn button:disabled {
     background-color: black;
+    color: aliceblue;
     font-family: 'Courier New', Courier, monospace;
 }
 
@@ -104,6 +110,7 @@ textarea {
 }
 
 .estatistica {
+    overflow: auto;
     display: flex;
     justify-content: space-around;
     padding: 20px;
